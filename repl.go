@@ -37,7 +37,10 @@ func startRepl(cfg *config) {
 			continue
 		}
 
-		command.callback(cfg, args...)
+		err := command.callback(cfg, args...)
+		if err != nil {
+			fmt.Printf("Error: %s\n", err)
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -83,6 +86,21 @@ func getCommands() map[string]cliCommand {
 			name:        "explore {location_area}",
 			description: "Lists the pokemon in a location area",
 			callback:    callbackExplore,
+		},
+		"catch": {
+			name:        "catch {pokemon}",
+			description: "Attempt to catch a pokemon and add it to your pokedex",
+			callback:    callbackCatch,
+		},
+		"inspect": {
+			name:        "inspect {pokemon}",
+			description: "View information about a pokemon that was caught",
+			callback:    callbackInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "View all caught pokemon",
+			callback:    callbackPokedex,
 		},
 	}
 }
