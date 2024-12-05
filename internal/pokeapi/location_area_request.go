@@ -62,7 +62,6 @@ func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) 
 
 	cachedData, ok := c.cache.Get(fullURL)
 	if ok {
-		fmt.Println("HIT CACHE!")
 		locationArea := LocationArea{}
 		err := json.Unmarshal(cachedData, &locationArea)
 		if err != nil {

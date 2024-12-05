@@ -13,7 +13,6 @@ func (c *Client) GetPokemon(pokemonName string) (Pokemon, error) {
 
 	cachedData, ok := c.cache.Get(fullURL)
 	if ok {
-		fmt.Println("HIT CACHE!")
 		pokemon := Pokemon{}
 		err := json.Unmarshal(cachedData, &pokemon)
 		if err != nil {
